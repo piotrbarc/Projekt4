@@ -26,13 +26,25 @@ this.color = color;
 }
 
 let balls = [];
-// draw random balls on canvas and add them to array 'balls'
-for(let i =0 ;i < 12 ; i++)
-{
-let random = Math.floor(Math.random()*100);
-let random2 = Math.floor(Math.random()*100);
 
- let NewBall = new Ball(5*random, 10*random2 , 'red');
+
+// draw random balls on canvas and add them to array 'balls'
+for(let i =0 ;i < 15 ; i++)
+{
+let random = Math.floor(Math.random()*1000);
+let random2 = Math.floor(Math.random()*1000);
+
+while(random < 50 || random > 550)
+{
+   random = Math.floor(Math.random()*1000);
+}
+while(random2 < 50 || random2 > 750)
+{
+   random2 = Math.floor(Math.random()*1000);
+}
+
+ let NewBall = new Ball(random, random2 , 'red');
+ 
  NewBall.drawBall();
 balls.push(NewBall);
 }
