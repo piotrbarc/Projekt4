@@ -1,14 +1,7 @@
 
 let canvas = document.querySelector('#canvas');
 let ctx = canvas.getContext('2d');
-/*ctx.beginPath();
 
-
-ctx.arc(50, 30, 20, 0, 2 * Math.PI);
-ctx.fillStyle = '#ff0000';
-ctx.fill();
-ctx.stroke(); 
-*/
 
 // creating ball
 class Ball
@@ -22,24 +15,26 @@ this.color = color;
     }
 
 // drawing ball in canvas 
-    drawBall()
+   drawBall()
     {
-    this.ctx.beginPath();
-    this.ctx.arc(this.cordX, this.cordY, 20, 0, 2 * Math.PI);
-    this.ctx.fillStyle = this.color;
-    this.ctx.fill();
-    this.ctx.stroke(); 
+    ctx.beginPath();
+    ctx.arc(this.cordX, this.cordY, 25, 0, 2 * Math.PI);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+    ctx.stroke(); 
     }
 }
-//let ball1 = new Ball(50, 50, "#e74c3c");
 
-let ball1 = new Ball(60, 60, '#ff0000');
+let balls = [];
+// draw random balls on canvas and add them to array 'balls'
+for(let i =0 ;i < 12 ; i++)
+{
+let random = Math.floor(Math.random()*100);
+let random2 = Math.floor(Math.random()*100);
 
+ let NewBall = new Ball(5*random, 10*random2 , 'red');
+ NewBall.drawBall();
+balls.push(NewBall);
+}
 
-
-
-ctx.arc(50, 30, 20, 0, 2 * Math.PI);
-ctx.fillStyle = '#ff0000';
-ctx.fill();
-ctx.stroke(); 
 
