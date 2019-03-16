@@ -26,27 +26,41 @@ this.color = color;
 }
 
 let balls = [];
-
+let randomsX =[];
+let randomsY =[];
 
 // draw random balls on canvas and add them to array 'balls'
-for(let i =0 ;i < 15 ; i++)
+for(let i =0 ;i < 10 ; i++)
 {
-let random = Math.floor(Math.random()*1000);
-let random2 = Math.floor(Math.random()*1000);
+    //random balls only inside canvas
+let random = Math.floor(Math.random() * 500) + 50;
+let random2 = Math.floor(Math.random() * 750) + 50;
 
-while(random < 50 || random > 550)
+
+//if any random ball has collision with another ball , get a new random ball 
+while(randomsX.includes(random ) || randomsY.includes(random2) )
 {
-   random = Math.floor(Math.random()*1000);
-}
-while(random2 < 50 || random2 > 750)
-{
-   random2 = Math.floor(Math.random()*1000);
+    random = Math.floor(Math.random() * 500) + 50;
+    random2 = Math.floor(Math.random() * 750) + 50;
+    
 }
 
+
+// push random cords  to array to avoid collision (+30 radius)
+
+for(let l = 0 ; l <30 ; l++ )
+{
+randomsX.push(random + l);
+randomsX.push(random - l);
+randomsY.push(random2 + l);
+randomsY.push(random2 - l);
+}
+// creating new ball without collision inside canvas
  let NewBall = new Ball(random, random2 , 'red');
  
  NewBall.drawBall();
 balls.push(NewBall);
 }
-
+console.log(randomsX);
+console.log(randomsY);
 
