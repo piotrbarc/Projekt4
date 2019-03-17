@@ -2,7 +2,7 @@
 let canvas = document.querySelector('#canvas');
 let ctx = canvas.getContext('2d');
 
-
+let flag;
 // creating ball
 class Ball
 {
@@ -76,9 +76,9 @@ let start = Date.now();
 
 
 
-let testBall = new Ball(240, 40, 'black');
-testBall.drawBall();
-let finishBall = new Ball(550, 550, 'blue');
+//let testBall = new Ball(50, 50, 'black');
+//testBall.drawBall();
+let finishBall = new Ball(650, 50, 'blue');
     finishBall.drawBall();
 // moving the ball with the sensors
 
@@ -86,12 +86,11 @@ let finishBall = new Ball(550, 550, 'blue');
 
 function handleOrientation(event)  {  
 
-    event.beta = 30;
-    event.gamma = 5;
+   
     // clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height); 
-    let x = event.beta*8;    
-        let y = event.gamma*8; 
+    let x = event.alpha*8;    
+        let y = event.beta*8; 
         // create new ball which is able to moving with sensors
     let ball = new Ball(x,y, 'black')  
     ball.drawBall();
@@ -106,7 +105,7 @@ function handleOrientation(event)  {
         balls[k].drawBall();
     }
 
-
+ 
     //checking collision with random balls 
     for(let p = 0 ; p< balls.length; p++)
     {
@@ -121,33 +120,61 @@ function handleOrientation(event)  {
         // checking if circles intersecting each other
         if(0<mid && mid < 50)
         {
-           // refresh page
-          // window.location.reload() 
+
+            // show text after lose
+            ctx.font = "80px Arial";
+            ctx.fillStyle = 'gold';
+            ctx.fillText("Game Over", canvas.width/4, canvas.height/2); 
+          
+           // refresh page after 5s
+           window.setTimeout(function() 
+           {
            
+               location.reload();}, 5000)
+               
+               
+            }
+            
             
         }
         
-    
-    }
-
-    // if black ball hit blue ball, user will win
-    let xa = x;
+        // if black ball hit blue ball, user will win
+        let xa = x;
         let ya = y;
         let xb = finishBall.cordX;
         let yb = finishBall.cordY;
         let mid = parseInt(Math.sqrt((xb-xa)*(xb-xa) + (yb-ya)*(yb-ya)));
-         // console.log('AB : ',mid);
-
-
        
+        
+        
+        
         if(0<mid && mid < 50)
         {
-           //check time and refresh page
+
+            let stop = Date.now();
+            let text = ((stop- start)/1000 + 'sekund');
+            // show text after win
+            ctx.font = "60px Arial";
+            ctx.fillStyle = 'gold';
+            flag = 0;
+            
+            ctx.fillText(`You Win !!!`,canvas.width/4, canvas.height/2) 
+            ctx.fillText (text , canvas.width/4, canvas.height/3); 
+          
+
+
+            //check time and refresh page
            
-           
-           let stop = Date.now();
-           alert((stop- start)/1000 + 'sekund');
-           window.location.reload() 
+            window.setTimeout(function() 
+            {
+                
+                location.reload();}, 5000)
+                
+                
+                
+            }
+            
+            
             
         }
 
@@ -156,6 +183,8 @@ function handleOrientation(event)  {
     
  
     
-}
-    
-    window.addEventListener("deviceorientation", handleOrientation);
+
+    if(flag != 0)
+    {
+   // window.addEventListener("deviceorientation", handleOrientation);
+    }
