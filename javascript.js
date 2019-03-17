@@ -64,3 +64,27 @@ balls.push(NewBall);
 console.log(randomsX);
 console.log(randomsY);
 
+
+
+
+// moving the ball with the sensors
+
+function handleOrientation(event)  {  
+    // clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height); 
+    let x = event.beta *5;    
+        let y = event.gamma *5; 
+        // create new ball which is able to moving with sensors
+    let ball = new Ball(x,y, 'black')  
+    ball.drawBall();
+      
+    // draws random random balls on cleared canvas
+    for(let k = 0 ; k< balls.length; k++)
+    {
+        balls[k].drawBall();
+    }
+    
+    
+}
+    
+    window.addEventListener("deviceorientation", handleOrientation);
