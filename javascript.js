@@ -2,7 +2,7 @@
 let canvas = document.querySelector('#canvas');
 let ctx = canvas.getContext('2d');
 
-let flag;
+
 // creating ball
 class Ball
 {
@@ -156,7 +156,7 @@ function handleOrientation(event)  {
             // show text after win
             ctx.font = "60px Arial";
             ctx.fillStyle = 'gold';
-            flag = 0;
+           
             
             ctx.fillText(`You Win !!!`,canvas.width/4, canvas.height/2) 
             ctx.fillText (text , canvas.width/4, canvas.height/3); 
@@ -184,7 +184,6 @@ function handleOrientation(event)  {
  
     
 
-    if(flag != 0)
-    {
-   // window.addEventListener("deviceorientation", handleOrientation);
-    }
+  
+    window.addEventListener("deviceorientation", handleOrientation);
+    
