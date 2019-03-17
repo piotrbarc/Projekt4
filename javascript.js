@@ -23,11 +23,17 @@ this.color = color;
     ctx.fill();
     ctx.stroke(); 
     }
+
+
+    
 }
+
+
 
 let balls = [];
 let randomsX =[];
 let randomsY =[];
+
 
 // draw random balls on canvas and add them to array 'balls'
 for(let i =0 ;i < 10 ; i++)
@@ -61,39 +67,94 @@ randomsY.push(random2 - l);
  NewBall.drawBall();
 balls.push(NewBall);
 }
-console.log(randomsX);
-console.log(randomsY);
+
+
+let start = Date.now();
 
 
 
 
+
+
+let testBall = new Ball(240, 40, 'black');
+testBall.drawBall();
+let finishBall = new Ball(550, 550, 'blue');
+    finishBall.drawBall();
 // moving the ball with the sensors
 
+
+
 function handleOrientation(event)  {  
+
+    event.beta = 30;
+    event.gamma = 5;
     // clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height); 
-    let x = event.beta*5;    
-        let y = event.gamma*5; 
+    let x = event.beta*8;    
+        let y = event.gamma*8; 
         // create new ball which is able to moving with sensors
     let ball = new Ball(x,y, 'black')  
     ball.drawBall();
-      
+  
+    
+    finishBall.drawBall();
     
     // draws random random balls on cleared canvas
     for(let k = 0 ; k< balls.length; k++)
     {
+        
         balls[k].drawBall();
     }
-console.log('x2' , x);
-    console.log('x', parseInt(x , 10));
-    console.log('y', parseInt(y , 10));
-    if(randomsX.includes(parseInt(x , 10)) && randomsY.includes(parseInt(y , 10)) )
-{
+
+
+    //checking collision with random balls 
+    for(let p = 0 ; p< balls.length; p++)
+    {
+        let xa = x;
+        let ya = y;
+        let xb = balls[p].cordX;
+        let yb = balls[p].cordY;
+        let mid = parseInt(Math.sqrt((xb-xa)*(xb-xa) + (yb-ya)*(yb-ya)));
+         // console.log('AB : ',mid);
+
+
+        // checking if circles intersecting each other
+        if(0<mid && mid < 50)
+        {
+           // refresh page
+          // window.location.reload() 
+           
+            
+        }
+        
     
-    console.log("koniec gry");
+    }
+
+    // if black ball hit blue ball, user will win
+    let xa = x;
+        let ya = y;
+        let xb = finishBall.cordX;
+        let yb = finishBall.cordY;
+        let mid = parseInt(Math.sqrt((xb-xa)*(xb-xa) + (yb-ya)*(yb-ya)));
+         // console.log('AB : ',mid);
+
+
+       
+        if(0<mid && mid < 50)
+        {
+           //check time and refresh page
+           
+           
+           let stop = Date.now();
+           alert((stop- start)/1000 + 'sekund');
+           window.location.reload() 
+            
+        }
+
+
     
-}
     
+ 
     
 }
     
