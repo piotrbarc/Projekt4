@@ -48,7 +48,7 @@ while(randomsX.includes(random ) || randomsY.includes(random2) )
 
 // push random cords  to array to avoid collision (+30 radius)
 
-for(let l = 0 ; l <30 ; l++ )
+for(let l = 0 ; l <25 ; l++ )
 {
 randomsX.push(random + l);
 randomsX.push(random - l);
@@ -72,17 +72,27 @@ console.log(randomsY);
 function handleOrientation(event)  {  
     // clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height); 
-    let x = event.beta *5;    
-        let y = event.gamma *5; 
+    let x = event.beta*5;    
+        let y = event.gamma*5; 
         // create new ball which is able to moving with sensors
     let ball = new Ball(x,y, 'black')  
     ball.drawBall();
       
+    
     // draws random random balls on cleared canvas
     for(let k = 0 ; k< balls.length; k++)
     {
         balls[k].drawBall();
     }
+console.log('x2' , x);
+    console.log('x', parseInt(x , 10));
+    console.log('y', parseInt(y , 10));
+    if(randomsX.includes(parseInt(x , 10)) && randomsY.includes(parseInt(y , 10)) )
+{
+    
+    console.log("koniec gry");
+    
+}
     
     
 }
