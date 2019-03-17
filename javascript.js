@@ -76,8 +76,8 @@ let start = Date.now();
 
 
 
-//let testBall = new Ball(50, 50, 'black');
-//testBall.drawBall();
+let testBall = new Ball(0, 750, 'black');
+testBall.drawBall();
 let finishBall = new Ball(650, 50, 'blue');
     finishBall.drawBall();
 // moving the ball with the sensors
@@ -122,6 +122,7 @@ function handleOrientation(event)  {
         {
 
             // show text after lose
+           
             ctx.font = "80px Arial";
             ctx.fillStyle = 'gold';
             ctx.fillText("Game Over", canvas.width/4, canvas.height/2); 
@@ -156,6 +157,7 @@ function handleOrientation(event)  {
             // show text after win
             ctx.font = "60px Arial";
             ctx.fillStyle = 'gold';
+            
            
             
             ctx.fillText(`You Win !!!`,canvas.width/4, canvas.height/2) 
